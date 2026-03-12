@@ -20,7 +20,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing image or date of birth' });
   }
 
-  // Calculate zodiac sign from DOB
   function getZodiac(dobStr) {
     const d = new Date(dobStr);
     const month = d.getMonth() + 1;
@@ -48,9 +47,7 @@ export default async function handler(req, res) {
 Analyze this person's photo carefully. Their date of birth is ${dob}. They are approximately ${age} years old. Their zodiac sign is ${zodiac.sign} (${zodiac.symbol} ${zodiac.hindi}).
 
 Your reading has TWO PARTS:
-
 PART 1 — FACE READING: Read their facial features (eyes, expression, energy, aura) to determine if they are usually happy, sad, or mixed emotionally.
-
 PART 2 — ASTROLOGY: Based on their zodiac sign ${zodiac.sign} and birth date ${dob}, give deep astrological predictions.
 
 Return ONLY valid JSON, absolutely no markdown, no extra text, no code blocks:
@@ -64,82 +61,52 @@ Return ONLY valid JSON, absolutely no markdown, no extra text, no code blocks:
   "dominant_mood": "happy" or "sometimes" or "sad",
   "face_verdict": "One poetic sentence about their emotional nature from face reading",
   "face_sections": [
-    {
-      "icon": "👁️",
-      "label": "FACE READING — SOUL ENERGY",
-      "stripe": "stripe-saffron",
-      "content": "3-4 sentences deeply reading their facial features — eyes reveal their depth, expression shows their nature, overall energy and what it means about who they truly are inside"
-    },
-    {
-      "icon": "😊",
-      "label": "FACE READING — EMOTIONAL PATTERN",
-      "stripe": "stripe-cosmic",
-      "content": "3-4 sentences about their emotional patterns based on face — are they naturally joyful, do they hide pain, when are they truly happy vs when do they feel low"
-    }
+    {"icon":"👁️","label":"FACE READING — SOUL ENERGY","stripe":"stripe-saffron","content":"3-4 sentences deeply reading their facial features — eyes reveal their depth, expression shows their nature, overall energy and what it means about who they truly are inside"},
+    {"icon":"😊","label":"FACE READING — EMOTIONAL PATTERN","stripe":"stripe-cosmic","content":"3-4 sentences about their emotional patterns based on face — are they naturally joyful, do they hide pain, when are they truly happy vs when do they feel low"}
   ],
   "astro_sections": [
-    {
-      "icon": "🪐",
-      "label": "ASTROLOGY — YOUR ${zodiac.sign.toUpperCase()} DESTINY",
-      "stripe": "stripe-gold",
-      "content": "3-4 sentences about their core personality and life path as a ${zodiac.sign}, their ruling planet, element, and what the cosmos has destined for them"
-    },
-    {
-      "icon": "🔮",
-      "label": "ASTROLOGY — NEAR FUTURE (3 Months)",
-      "stripe": "stripe-mystic",
-      "content": "3-4 sentences of specific predictions for the next 3 months based on current planetary positions for ${zodiac.sign} — career, opportunities, challenges"
-    },
-    {
-      "icon": "💫",
-      "label": "ASTROLOGY — LOVE & RELATIONSHIPS",
-      "stripe": "stripe-rose",
-      "content": "3-4 sentences about their romantic destiny, compatible signs, and what the universe has planned for their heart based on ${zodiac.sign} traits"
-    },
-    {
-      "icon": "⚡",
-      "label": "COSMIC MESSAGE",
-      "stripe": "stripe-teal",
-      "content": "One powerful, deeply personal message combining both their face reading and astrology — make it feel like it was written only for this exact person born on ${dob}"
-    }
+    {"icon":"🪐","label":"ASTROLOGY — YOUR ${zodiac.sign.toUpperCase()} DESTINY","stripe":"stripe-gold","content":"3-4 sentences about their core personality and life path as a ${zodiac.sign}, their ruling planet, element, and what the cosmos has destined for them"},
+    {"icon":"🔮","label":"ASTROLOGY — NEAR FUTURE (3 Months)","stripe":"stripe-mystic","content":"3-4 sentences of specific predictions for the next 3 months based on current planetary positions for ${zodiac.sign} — career, opportunities, challenges"},
+    {"icon":"💫","label":"ASTROLOGY — LOVE & RELATIONSHIPS","stripe":"stripe-rose","content":"3-4 sentences about their romantic destiny, compatible signs, and what the universe has planned for their heart based on ${zodiac.sign} traits"},
+    {"icon":"⚡","label":"COSMIC MESSAGE","stripe":"stripe-teal","content":"One powerful, deeply personal message combining both their face reading and astrology — make it feel like it was written only for this exact person born on ${dob}"}
   ]
 }`;
 
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+    const apiKey = process.env.GROQ_API_KEY;
 
-    const response = await fetch(url, {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
       body: JSON.stringify({
-        contents: [{
-          parts: [
+        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        max_tokens: 1500,
+        temperature: 0.8,
+        messages: [{
+          role: 'user',
+          content: [
             {
-              inline_data: {
-                mime_type: imageType || 'image/jpeg',
-                data: imageBase64
-              }
+              type: 'image_url',
+              image_url: { url: `data:${imageType || 'image/jpeg'};base64,${imageBase64}` }
             },
-            { text: prompt }
+            { type: 'text', text: prompt }
           ]
-        }],
-        generationConfig: {
-          temperature: 0.8,
-          maxOutputTokens: 1500,
-        }
+        }]
       })
     });
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
       return res.status(response.status).json({
-        error: err.error?.message || 'Gemini API error'
+        error: err.error?.message || 'Groq API error'
       });
     }
 
     const data = await response.json();
-    const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const raw = data.choices?.[0]?.message?.content || '';
     const clean = raw.replace(/```json|```/g, '').trim();
     const reading = JSON.parse(clean);
 
