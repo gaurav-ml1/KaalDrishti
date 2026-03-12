@@ -6,7 +6,7 @@
 <title>KaalDrishti — काल दृष्टि</title>
 <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Hindi:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--space:#00020f;--cream:#f0e6c8;--saffron:#ff9933;--gold:#f5c842;--cosmic:#5b8fff;--violet:#b94fff;--rose:#ff6b9d;--teal:#00e5cc;}
+:root{--space:#00020f;--cream:#f0e6c8;--saffron:#ff9933;--gold:#f5c842;--cosmic:#5b8fff;--violet:#b94fff;--rose:#ff6b9d;--teal:#00e5cc;--mystic:#9b6dff;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{background:var(--space);color:var(--cream);font-family:'Tiro Devanagari Hindi',serif;min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 #spaceCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
@@ -15,8 +15,8 @@ body{background:var(--space);color:var(--cream);font-family:'Tiro Devanagari Hin
 .container{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:0 16px 100px;}
 @media(min-width:480px){.container{padding:0 28px 100px;}}
 
-/* HEADER */
-header{text-align:center;padding:44px 0 36px;position:relative;}
+/* ── HEADER ── */
+header{text-align:center;padding:44px 0 32px;}
 .kaal-emblem{width:90px;height:90px;margin:0 auto 20px;position:relative;}
 .emblem-planet{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9933 0%,#c97320 40%,#7a3d00 70%,#1a0800 100%);box-shadow:0 0 0 1px rgba(255,153,51,.3),0 0 30px rgba(255,153,51,.4),0 0 80px rgba(255,153,51,.15),inset -15px -10px 30px rgba(0,0,0,.6);animation:planet-breathe 6s ease-in-out infinite;}
 @keyframes planet-breathe{0%,100%{box-shadow:0 0 0 1px rgba(255,153,51,.3),0 0 30px rgba(255,153,51,.4),0 0 80px rgba(255,153,51,.15),inset -15px -10px 30px rgba(0,0,0,.6);}50%{box-shadow:0 0 0 1px rgba(255,153,51,.5),0 0 50px rgba(255,153,51,.6),0 0 120px rgba(255,153,51,.3),inset -15px -10px 30px rgba(0,0,0,.6);}}
@@ -24,58 +24,61 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
 @keyframes ring-spin{to{transform:translate(-50%,-50%) rotateX(75deg) rotateZ(360deg);}}
 .emblem-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);top:-4px;left:50%;transform:translateX(-50%);box-shadow:0 0 10px var(--gold);}
 .app-name{font-family:'Yatra One',serif;font-size:clamp(32px,9vw,64px);background:linear-gradient(135deg,var(--saffron) 0%,var(--gold) 50%,#fff5d0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:3px;line-height:1.1;filter:drop-shadow(0 0 20px rgba(255,153,51,.4));margin-bottom:6px;}
-.app-sub{font-family:'Tiro Devanagari Hindi',serif;font-style:italic;font-size:clamp(13px,3.5vw,16px);color:rgba(240,230,200,.45);letter-spacing:4px;text-transform:uppercase;}
-.divider{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),var(--gold),transparent);margin:20px auto;position:relative;}
+.app-sub{font-style:italic;font-size:clamp(13px,3.5vw,16px);color:rgba(240,230,200,.45);letter-spacing:4px;text-transform:uppercase;}
+.divider{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),var(--gold),transparent);margin:18px auto;position:relative;}
 .divider::before{content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:10px;background:var(--space);padding:0 8px;}
 
-/* CARD */
-.card{background:linear-gradient(135deg,rgba(5,10,40,.85),rgba(1,4,24,.95));border:1px solid rgba(245,200,66,.18);padding:clamp(20px,5vw,36px) clamp(16px,5vw,32px);margin-bottom:20px;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+/* ── CARD ── */
+.card{background:linear-gradient(135deg,rgba(5,10,40,.88),rgba(1,4,24,.96));border:1px solid rgba(245,200,66,.18);padding:clamp(20px,5vw,36px) clamp(16px,5vw,32px);margin-bottom:20px;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
 .card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(255,153,51,.06) 0%,transparent 60%),radial-gradient(ellipse at bottom right,rgba(91,143,255,.06) 0%,transparent 60%);pointer-events:none;}
 .cc{position:absolute;width:14px;height:14px;border-color:rgba(245,200,66,.4);border-style:solid;}
 .cc-tl{top:8px;left:8px;border-width:1px 0 0 1px;}.cc-tr{top:8px;right:8px;border-width:1px 1px 0 0;}
 .cc-bl{bottom:8px;left:8px;border-width:0 0 1px 1px;}.cc-br{bottom:8px;right:8px;border-width:0 1px 1px 0;}
 
-/* DROP ZONE */
-.drop-zone{border:1px dashed rgba(245,200,66,.25);padding:clamp(32px,9vw,52px) 20px;text-align:center;cursor:pointer;transition:all .35s;touch-action:manipulation;position:relative;overflow:hidden;}
-.drop-zone:hover,.drop-zone.dragging{border-color:rgba(245,200,66,.6);box-shadow:0 0 40px rgba(255,153,51,.1),inset 0 0 40px rgba(255,153,51,.03);}
-.drop-planet{font-size:clamp(36px,10vw,52px);margin-bottom:14px;display:block;animation:float-planet 4s ease-in-out infinite;}
+/* ── DROP ZONE ── */
+.drop-zone{border:1px dashed rgba(245,200,66,.25);padding:clamp(28px,8vw,46px) 16px;text-align:center;cursor:pointer;transition:all .35s;touch-action:manipulation;}
+.drop-zone:hover,.drop-zone.dragging{border-color:rgba(245,200,66,.6);box-shadow:0 0 40px rgba(255,153,51,.1);}
+.drop-planet{font-size:clamp(34px,10vw,50px);margin-bottom:12px;display:block;animation:float-planet 4s ease-in-out infinite;}
 @keyframes float-planet{0%,100%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-12px) rotate(5deg);}}
-.drop-title{font-family:'Yatra One',serif;font-size:clamp(13px,3.5vw,17px);color:var(--gold);letter-spacing:2px;margin-bottom:8px;}
-.drop-sub{color:rgba(240,230,200,.4);font-style:italic;font-size:clamp(12px,3.5vw,14px);line-height:1.6;}
+.drop-title{font-family:'Yatra One',serif;font-size:clamp(13px,3.5vw,17px);color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.drop-sub{color:rgba(240,230,200,.4);font-style:italic;font-size:clamp(12px,3vw,14px);line-height:1.6;}
 #fileInput{display:none;}
 
-/* PREVIEW */
-#previewWrap{display:none;text-align:center;padding:clamp(28px,7vw,44px) 0 24px;}
+/* ── PREVIEW ── */
+#previewWrap{display:none;text-align:center;padding:clamp(24px,6vw,40px) 0 20px;}
 .orbit-system{position:relative;display:inline-block;}
 .orbit-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid;animation:orbit-spin linear infinite;}
-.or1{width:clamp(220px,63vw,265px);height:clamp(220px,63vw,265px);border-color:rgba(255,153,51,.2);animation-duration:15s;}
-.or2{width:clamp(260px,75vw,310px);height:clamp(260px,75vw,310px);border-color:rgba(91,143,255,.15);border-style:dashed;animation-duration:25s;animation-direction:reverse;}
-.or3{width:clamp(300px,87vw,360px);height:clamp(300px,87vw,360px);border-color:rgba(245,200,66,.08);animation-duration:40s;}
+.or1{width:clamp(215px,62vw,260px);height:clamp(215px,62vw,260px);border-color:rgba(255,153,51,.2);animation-duration:15s;}
+.or2{width:clamp(255px,74vw,305px);height:clamp(255px,74vw,305px);border-color:rgba(91,143,255,.15);border-style:dashed;animation-duration:25s;animation-direction:reverse;}
+.or3{width:clamp(295px,86vw,355px);height:clamp(295px,86vw,355px);border-color:rgba(245,200,66,.07);animation-duration:40s;}
 @keyframes orbit-spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
 .orbit-dot{position:absolute;border-radius:50%;top:0;left:50%;transform:translateX(-50%);}
 .od1{width:8px;height:8px;background:var(--saffron);box-shadow:0 0 10px var(--saffron);margin:-4px 0 0 -4px;}
 .od2{width:6px;height:6px;background:var(--cosmic);box-shadow:0 0 8px var(--cosmic);margin:-3px 0 0 -3px;}
-#previewImg{width:clamp(175px,50vw,210px);height:clamp(175px,50vw,210px);border-radius:50%;object-fit:cover;display:block;border:2px solid rgba(255,153,51,.5);box-shadow:0 0 0 4px rgba(255,153,51,.08),0 0 40px rgba(255,153,51,.3),0 0 80px rgba(91,143,255,.15);}
+#previewImg{width:clamp(170px,48vw,205px);height:clamp(170px,48vw,205px);border-radius:50%;object-fit:cover;display:block;border:2px solid rgba(255,153,51,.5);box-shadow:0 0 0 4px rgba(255,153,51,.08),0 0 40px rgba(255,153,51,.3),0 0 80px rgba(91,143,255,.15);}
 
-/* INPUT */
-.input-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;margin-bottom:8px;display:block;opacity:.75;}
-.mystic-input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(245,200,66,.2);color:var(--cream);font-family:'Tiro Devanagari Hindi',serif;font-size:clamp(16px,4vw,19px);padding:clamp(12px,3vw,15px) 16px;outline:none;transition:all .3s;border-radius:0;appearance:none;-webkit-appearance:none;}
+/* ── INPUTS ── */
+.input-row{display:grid;gap:16px;margin-top:20px;}
+.input-group{display:flex;flex-direction:column;}
+.input-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;margin-bottom:8px;opacity:.75;}
+.mystic-input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(245,200,66,.2);color:var(--cream);font-family:'Tiro Devanagari Hindi',serif;font-size:clamp(15px,4vw,18px);padding:clamp(12px,3vw,14px) 16px;outline:none;transition:all .3s;border-radius:0;appearance:none;-webkit-appearance:none;}
 .mystic-input:focus{border-color:rgba(255,153,51,.6);background:rgba(255,153,51,.04);box-shadow:0 0 20px rgba(255,153,51,.08);}
 .mystic-input::placeholder{color:rgba(240,230,200,.22);font-style:italic;}
+input[type="date"].mystic-input::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(1) saturate(3) hue-rotate(10deg);cursor:pointer;}
 
-/* CTA */
+/* ── CTA ── */
 .reveal-btn{display:none;width:100%;margin-top:22px;padding:clamp(17px,4.5vw,22px) 16px;background:linear-gradient(135deg,rgba(255,153,51,.12),rgba(245,200,66,.12),rgba(91,143,255,.12));border:1px solid rgba(255,153,51,.45);color:var(--saffron);font-family:'Yatra One',serif;font-size:clamp(13px,3.5vw,16px);letter-spacing:2px;cursor:pointer;transition:all .4s;position:relative;overflow:hidden;touch-action:manipulation;}
 .reveal-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,153,51,.12),transparent);transition:left .7s;}
 .reveal-btn:hover::before{left:100%;}
-.reveal-btn:hover{border-color:var(--gold);box-shadow:0 0 40px rgba(255,153,51,.2),0 0 80px rgba(255,153,51,.08);color:var(--gold);transform:translateY(-2px);}
+.reveal-btn:hover{border-color:var(--gold);box-shadow:0 0 40px rgba(255,153,51,.2);color:var(--gold);transform:translateY(-2px);}
 .reveal-btn:active{transform:scale(.98);}
 .reveal-btn.show{display:block;}
 
-/* LOADING */
+/* ── LOADING ── */
 #loadingSection{display:none;text-align:center;padding:clamp(56px,14vw,80px) 20px;}
 .solar-loader{position:relative;width:140px;height:140px;margin:0 auto 32px;}
-.sun-core{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fff5d0,var(--saffron) 50%,#7a3000);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 20px var(--saffron),0 0 60px rgba(255,153,51,.4),0 0 100px rgba(255,153,51,.2);animation:sun-pulse 2s ease-in-out infinite;}
-@keyframes sun-pulse{0%,100%{box-shadow:0 0 20px var(--saffron),0 0 60px rgba(255,153,51,.4),0 0 100px rgba(255,153,51,.2);}50%{box-shadow:0 0 30px var(--saffron),0 0 90px rgba(255,153,51,.6),0 0 150px rgba(255,153,51,.3);}}
+.sun-core{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fff5d0,var(--saffron) 50%,#7a3000);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 20px var(--saffron),0 0 60px rgba(255,153,51,.4);animation:sun-pulse 2s ease-in-out infinite;}
+@keyframes sun-pulse{0%,100%{box-shadow:0 0 20px var(--saffron),0 0 60px rgba(255,153,51,.4);}50%{box-shadow:0 0 35px var(--saffron),0 0 90px rgba(255,153,51,.6);}}
 .loader-orbit{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid;animation:orbit-spin linear infinite;}
 .lo1{width:80px;height:80px;border-color:rgba(245,200,66,.4);animation-duration:2s;}
 .lo2{width:110px;height:110px;border-color:rgba(91,143,255,.3);animation-duration:3.5s;animation-direction:reverse;border-style:dashed;}
@@ -88,67 +91,84 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
 @keyframes flicker{0%,100%{opacity:.4}50%{opacity:1}}
 .load-sub{font-style:italic;color:rgba(240,230,200,.4);font-size:clamp(13px,3.5vw,15px);padding:0 16px;line-height:1.6;}
 
-/* RESULTS */
+/* ── RESULTS ── */
 #resultsSection{display:none;}
-.results-top{text-align:center;padding:clamp(28px,6vw,44px) 0 24px;}
-.results-title{font-family:'Yatra One',serif;font-size:clamp(18px,5.5vw,30px);background:linear-gradient(135deg,var(--saffron),var(--gold),#fff5d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;letter-spacing:1px;}
-.results-name{font-style:italic;color:rgba(240,230,200,.5);font-size:clamp(14px,3.5vw,17px);letter-spacing:3px;}
+.results-top{text-align:center;padding:clamp(24px,6vw,40px) 0 20px;}
+.results-title{font-family:'Yatra One',serif;font-size:clamp(18px,5.5vw,30px);background:linear-gradient(135deg,var(--saffron),var(--gold),#fff5d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
 
-/* MOOD */
-.mood-card{background:linear-gradient(135deg,rgba(5,10,40,.85),rgba(1,4,24,.95));border:1px solid rgba(245,200,66,.15);padding:clamp(20px,5vw,32px);margin-bottom:20px;text-align:center;position:relative;overflow:hidden;animation:reveal .5s ease forwards;opacity:0;transform:translateY(18px);backdrop-filter:blur(10px);}
+/* zodiac badge */
+.zodiac-badge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(255,153,51,.12),rgba(245,200,66,.08));border:1px solid rgba(255,153,51,.3);padding:8px 20px;margin-bottom:6px;}
+.zodiac-symbol{font-size:28px;}
+.zodiac-info{text-align:left;}
+.zodiac-sign{font-family:'Yatra One',serif;font-size:clamp(14px,4vw,18px);color:var(--gold);line-height:1.2;}
+.zodiac-hindi{font-size:clamp(11px,3vw,13px);color:rgba(240,230,200,.5);letter-spacing:2px;}
+
+/* ── MOOD METER ── */
+.mood-card{background:linear-gradient(135deg,rgba(5,10,40,.88),rgba(1,4,24,.96));border:1px solid rgba(245,200,66,.15);padding:clamp(20px,5vw,30px);margin-bottom:18px;text-align:center;position:relative;overflow:hidden;animation:reveal .5s ease forwards;opacity:0;transform:translateY(18px);backdrop-filter:blur(10px);}
 .mood-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(255,153,51,.05) 0%,transparent 60%);pointer-events:none;}
 @keyframes reveal{to{opacity:1;transform:translateY(0);}}
-.mood-label{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:3px;color:var(--saffron);text-transform:uppercase;opacity:.7;margin-bottom:22px;}
-.mood-orbs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,3vw,24px);margin-bottom:22px;}
+.mood-label{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:3px;color:var(--saffron);text-transform:uppercase;opacity:.7;margin-bottom:20px;}
+.mood-orbs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,3vw,22px);margin-bottom:20px;}
 .mood-orb{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.2;transition:all .6s ease;}
 .mood-orb.active{opacity:1;}
 .mood-orb.active .orb-planet{animation:planet-glow 3s ease-in-out infinite;}
-.orb-planet{width:clamp(56px,15vw,82px);height:clamp(56px,15vw,82px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(24px,7.5vw,38px);border:2px solid;}
+.orb-planet{width:clamp(54px,14vw,80px);height:clamp(54px,14vw,80px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(22px,7vw,36px);border:2px solid;}
 @keyframes planet-glow{0%,100%{box-shadow:0 0 15px currentColor;}50%{box-shadow:0 0 40px currentColor,0 0 80px currentColor;}}
-.orb-happy .orb-planet{background:radial-gradient(circle at 35% 35%,rgba(255,200,80,.2),rgba(255,153,51,.1));border-color:rgba(255,153,51,.4);}
+.orb-happy .orb-planet{background:radial-gradient(circle at 35% 35%,rgba(255,200,80,.2),rgba(255,153,51,.08));border-color:rgba(255,153,51,.4);}
 .orb-sometimes .orb-planet{background:radial-gradient(circle at 35% 35%,rgba(91,143,255,.2),rgba(91,143,255,.08));border-color:rgba(91,143,255,.4);}
 .orb-sad .orb-planet{background:radial-gradient(circle at 35% 35%,rgba(0,229,204,.2),rgba(0,229,204,.08));border-color:rgba(0,229,204,.4);}
 .orb-happy.active .orb-planet{border-color:var(--saffron);}
 .orb-sometimes.active .orb-planet{border-color:var(--cosmic);}
 .orb-sad.active .orb-planet{border-color:var(--teal);}
-.orb-name{font-family:'Space Mono',monospace;font-size:clamp(7px,1.8vw,10px);letter-spacing:1px;text-transform:uppercase;opacity:.65;text-align:center;line-height:1.3;}
+.orb-name{font-family:'Space Mono',monospace;font-size:clamp(7px,1.8vw,9px);letter-spacing:1px;text-transform:uppercase;opacity:.65;text-align:center;line-height:1.3;}
 .orb-happy .orb-name{color:var(--saffron);}.orb-sometimes .orb-name{color:var(--cosmic);}.orb-sad .orb-name{color:var(--teal);}
-.mood-pct{font-family:'Yatra One',serif;font-size:clamp(20px,5.5vw,30px);}
+.mood-pct{font-family:'Yatra One',serif;font-size:clamp(18px,5vw,28px);}
 .orb-happy .mood-pct{color:var(--saffron);}.orb-sometimes .mood-pct{color:var(--cosmic);}.orb-sad .mood-pct{color:var(--teal);}
-.mood-verdict{font-style:italic;font-size:clamp(15px,4vw,18px);color:rgba(240,230,200,.78);line-height:1.8;padding:0 4px;}
+.mood-verdict{font-style:italic;font-size:clamp(14px,3.8vw,17px);color:rgba(240,230,200,.78);line-height:1.8;padding:0 4px;}
 
-/* CARDS */
-.reading-card{background:linear-gradient(135deg,rgba(5,10,40,.85),rgba(1,4,24,.95));border:1px solid rgba(245,200,66,.12);padding:clamp(18px,4.5vw,30px) clamp(16px,4.5vw,32px);margin-bottom:16px;position:relative;overflow:hidden;animation:reveal .6s ease forwards;opacity:0;transform:translateY(18px);backdrop-filter:blur(10px);}
+/* ── SECTION HEADERS ── */
+.section-header{display:flex;align-items:center;gap:12px;margin:28px 0 14px;}
+.section-header-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.2));}
+.section-header-line.right{background:linear-gradient(90deg,rgba(245,200,66,.2),transparent);}
+.section-title{font-family:'Yatra One',serif;font-size:clamp(12px,3vw,15px);letter-spacing:2px;white-space:nowrap;}
+.section-title.face{color:var(--saffron);}
+.section-title.astro{color:var(--cosmic);}
+
+/* ── READING CARDS ── */
+.reading-card{background:linear-gradient(135deg,rgba(5,10,40,.88),rgba(1,4,24,.96));border:1px solid rgba(245,200,66,.12);padding:clamp(16px,4vw,28px) clamp(14px,4vw,30px);margin-bottom:14px;position:relative;overflow:hidden;animation:reveal .6s ease forwards;opacity:0;transform:translateY(18px);backdrop-filter:blur(10px);}
 .card-stripe{position:absolute;top:0;left:0;width:3px;height:100%;}
 .stripe-saffron{background:linear-gradient(180deg,var(--saffron),transparent);}
 .stripe-cosmic{background:linear-gradient(180deg,var(--cosmic),transparent);}
 .stripe-rose{background:linear-gradient(180deg,var(--rose),transparent);}
 .stripe-teal{background:linear-gradient(180deg,var(--teal),transparent);}
-.card-head{font-family:'Space Mono',monospace;font-size:clamp(8px,2.2vw,10px);letter-spacing:3px;color:var(--saffron);text-transform:uppercase;opacity:.7;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.stripe-gold{background:linear-gradient(180deg,var(--gold),transparent);}
+.stripe-mystic{background:linear-gradient(180deg,var(--mystic),transparent);}
+.card-head{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:3px;color:var(--saffron);text-transform:uppercase;opacity:.7;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .card-head::after{content:'';flex:1;height:1px;background:rgba(245,200,66,.1);}
-.card-body{font-size:clamp(15px,4vw,17px);line-height:1.9;color:rgba(240,230,200,.82);font-weight:300;}
+.card-body{font-size:clamp(14px,3.8vw,16px);line-height:1.9;color:rgba(240,230,200,.82);font-weight:300;}
 
-/* ACTIONS */
+/* ── ACTIONS ── */
 .action-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px;}
-.action-btn{padding:clamp(14px,3.5vw,17px) 8px;border:1px solid;font-family:'Space Mono',monospace;font-size:clamp(9px,2.2vw,10px);letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:transparent;transition:all .3s;touch-action:manipulation;}
+.action-btn{padding:clamp(14px,3.5vw,16px) 8px;border:1px solid;font-family:'Space Mono',monospace;font-size:clamp(9px,2.2vw,10px);letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:transparent;transition:all .3s;touch-action:manipulation;}
 .btn-share{border-color:rgba(255,153,51,.35);color:var(--saffron);}
 .btn-share:hover{background:rgba(255,153,51,.1);border-color:var(--saffron);}
 .btn-reset{border-color:rgba(91,143,255,.35);color:var(--cosmic);}
 .btn-reset:hover{background:rgba(91,143,255,.1);border-color:var(--cosmic);}
 .action-btn:active{opacity:.7;transform:scale(.97);}
 .error-msg{display:none;text-align:center;padding:14px 16px;border:1px solid rgba(255,107,157,.3);color:var(--rose);font-style:italic;font-size:clamp(12px,3.5vw,14px);margin-top:14px;line-height:1.5;}
-.d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.38s}.d4{animation-delay:.54s}.d5{animation-delay:.7s}
+.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.3s}.d4{animation-delay:.42s}.d5{animation-delay:.54s}.d6{animation-delay:.66s}.d7{animation-delay:.78s}
 </style>
 </head>
 <body>
 
 <canvas id="spaceCanvas"></canvas>
-
 <div class="bg-planet" style="width:180px;height:180px;top:-60px;right:-40px;background:radial-gradient(circle at 35% 35%,rgba(91,143,255,.15),rgba(25,50,120,.08));border:1px solid rgba(91,143,255,.1);animation-duration:18s;"></div>
 <div class="bg-planet" style="width:120px;height:120px;bottom:10%;left:-30px;background:radial-gradient(circle at 35% 35%,rgba(185,79,255,.12),rgba(80,20,120,.06));border:1px solid rgba(185,79,255,.08);animation-duration:24s;animation-delay:-8s;"></div>
 <div class="bg-planet" style="width:60px;height:60px;top:35%;right:5%;background:radial-gradient(circle at 35% 35%,rgba(0,229,204,.1),rgba(0,80,70,.05));border:1px solid rgba(0,229,204,.07);animation-duration:14s;animation-delay:-4s;"></div>
 
 <div class="container">
+
+  <!-- HEADER -->
   <header>
     <div class="kaal-emblem">
       <div class="emblem-planet"></div>
@@ -159,6 +179,7 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
     <div class="divider"></div>
   </header>
 
+  <!-- UPLOAD -->
   <div id="uploadSection">
     <div class="card">
       <div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div>
@@ -168,6 +189,7 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
         <p class="drop-sub">Let the cosmos gaze upon your soul<br>and reveal what the universe has written for you</p>
         <input type="file" id="fileInput" accept="image/*">
       </div>
+
       <div id="previewWrap">
         <div class="orbit-system">
           <div class="orbit-ring or1"><div class="orbit-dot od1"></div></div>
@@ -176,15 +198,24 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
           <img id="previewImg" src="" alt="Your photo">
         </div>
       </div>
-      <div id="nameWrap" style="display:none;margin-top:22px;">
-        <label class="input-label">🌟 Your Name</label>
-        <input type="text" class="mystic-input" id="userName" placeholder="What shall the stars call you..." autocomplete="off" autocorrect="off" spellcheck="false">
+
+      <div id="inputsWrap" style="display:none;">
+        <div class="input-row">
+          <div class="input-group">
+            <label class="input-label">🌟 Date of Birth</label>
+            <input type="date" class="mystic-input" id="dobInput" max="">
+          </div>
+        </div>
       </div>
-      <button class="reveal-btn" id="revealBtn" onclick="revealSoul()">🔭 &nbsp; KaalDrishti Dekho &nbsp; 🔭</button>
+
+      <button class="reveal-btn" id="revealBtn" onclick="revealSoul()">
+        🔭 &nbsp; KaalDrishti Dekho &nbsp; 🔭
+      </button>
       <div class="error-msg" id="errorMsg"></div>
     </div>
   </div>
 
+  <!-- LOADING -->
   <div id="loadingSection">
     <div class="solar-loader">
       <div class="loader-orbit lo1"><div class="loader-planet lp1"></div></div>
@@ -193,19 +224,28 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
       <div class="sun-core"></div>
     </div>
     <div class="load-title">काल देख रहा है...</div>
-    <p class="load-sub" id="loadPhrase">Time is reading the story written on your face...</p>
+    <p class="load-sub" id="loadPhrase">Reading the cosmic story written on your face...</p>
   </div>
 
+  <!-- RESULTS -->
   <div id="resultsSection">
     <div class="results-top">
-      <div style="font-family:'Yatra One',serif;font-size:22px;letter-spacing:8px;color:var(--saffron);opacity:.5;margin-bottom:14px;">✦ ॐ ✦</div>
+      <div style="font-family:'Yatra One',serif;font-size:20px;letter-spacing:8px;color:var(--saffron);opacity:.5;margin-bottom:12px;">✦ ॐ ✦</div>
       <div class="results-title">दृष्टि प्रकट हुई</div>
-      <div class="results-name" id="resultsName"></div>
+      <div class="zodiac-badge" id="zodiacBadge">
+        <div class="zodiac-symbol" id="zodiacSymbol"></div>
+        <div class="zodiac-info">
+          <div class="zodiac-sign" id="zodiacSign"></div>
+          <div class="zodiac-hindi" id="zodiacHindi"></div>
+        </div>
+      </div>
       <div class="divider"></div>
     </div>
+
+    <!-- MOOD METER -->
     <div class="mood-card d1">
       <div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div>
-      <div class="mood-label">🪐 Your Emotional Cosmos</div>
+      <div class="mood-label">👁️ Face Reading — Emotional Cosmos</div>
       <div class="mood-orbs">
         <div class="mood-orb orb-happy" id="orbHappy">
           <div class="orb-planet">☀️</div>
@@ -213,7 +253,7 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
           <div class="orb-name">Always<br>Happy</div>
         </div>
         <div class="mood-orb orb-sometimes" id="orbSometimes">
-          <div class="orb-face orb-planet">🌗</div>
+          <div class="orb-planet">🌗</div>
           <div class="mood-pct" id="pctSometimes">—</div>
           <div class="orb-name">Some-<br>times</div>
         </div>
@@ -225,12 +265,29 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
       </div>
       <div class="mood-verdict" id="moodVerdict"></div>
     </div>
-    <div id="readingCards"></div>
+
+    <!-- PART 1: FACE READING -->
+    <div class="section-header">
+      <div class="section-header-line"></div>
+      <div class="section-title face">👁️ PART 1 — FACE READING</div>
+      <div class="section-header-line right"></div>
+    </div>
+    <div id="faceCards"></div>
+
+    <!-- PART 2: ASTROLOGY -->
+    <div class="section-header">
+      <div class="section-header-line"></div>
+      <div class="section-title astro">🪐 PART 2 — ASTROLOGY</div>
+      <div class="section-header-line right"></div>
+    </div>
+    <div id="astroCards"></div>
+
     <div class="action-row">
       <button class="action-btn btn-share" onclick="shareReading()">✦ Share</button>
       <button class="action-btn btn-reset" onclick="resetApp()">↺ New Reading</button>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -239,12 +296,9 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
   const canvas=document.getElementById('spaceCanvas');
   const ctx=canvas.getContext('2d');
   let W,H,stars=[],planets=[],comets=[];
-
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
-
   for(let i=0;i<300;i++) stars.push({x:Math.random()*5000,y:Math.random()*5000,r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()*.006+.001)*(Math.random()<.5?1:-1),speed:Math.random()*.08+.02});
-
   const pd=[
     {x:.15,y:.12,r:22,c1:'#ff9933',c2:'#7a3000',rings:true,speed:.00004},
     {x:.82,y:.25,r:16,c1:'#5b8fff',c2:'#0a1a5a',rings:false,speed:.00006},
@@ -253,10 +307,8 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
     {x:.9,y:.8,r:18,c1:'#f5c842',c2:'#6a4800',rings:true,speed:.000035},
   ];
   for(const d of pd) planets.push({...d,angle:Math.random()*Math.PI*2});
-
   function spawnComet(){comets.push({x:Math.random()*W*.5,y:Math.random()*H*.3,vx:4+Math.random()*4,vy:2+Math.random()*3,life:1,tail:[]});}
   spawnComet();setInterval(spawnComet,3500);
-
   let t=0;
   function draw(){
     ctx.clearRect(0,0,W,H);
@@ -264,14 +316,12 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
     g.addColorStop(0,'rgba(10,15,60,.95)');g.addColorStop(.5,'rgba(2,6,28,.98)');g.addColorStop(1,'rgba(0,2,15,1)');
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
     t+=.005;
-
     for(const s of stars){
       s.a+=s.da;if(s.a>1||s.a<0)s.da*=-1;
       const sx=(s.x+t*s.speed*100)%W,sy=(s.y+t*s.speed*30)%H;
       ctx.beginPath();ctx.arc(sx,sy,s.r,0,Math.PI*2);
       ctx.fillStyle=`rgba(255,255,255,${Math.max(0,Math.min(1,s.a))})`;ctx.fill();
     }
-
     for(const p of planets){
       p.angle+=p.speed;
       const px=p.x*W+Math.sin(p.angle)*15,py=p.y*H+Math.cos(p.angle)*10;
@@ -283,7 +333,6 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
       ctx.beginPath();ctx.arc(px,py,p.r,0,Math.PI*2);ctx.fillStyle=pg;ctx.fill();
       if(p.rings){ctx.save();ctx.translate(px,py);ctx.scale(1,.3);ctx.beginPath();ctx.arc(0,0,p.r*1.8,0,Math.PI*2);ctx.strokeStyle=p.c1+'55';ctx.lineWidth=3;ctx.stroke();ctx.restore();}
     }
-
     for(let i=comets.length-1;i>=0;i--){
       const c=comets[i];c.x+=c.vx;c.y+=c.vy;c.tail.push({x:c.x,y:c.y});
       if(c.tail.length>20)c.tail.shift();c.life-=.008;
@@ -302,7 +351,10 @@ header{text-align:center;padding:44px 0 36px;position:relative;}
   draw();
 })();
 
-/* ── APP ── */
+// Set max date to today
+document.getElementById('dobInput').max = new Date().toISOString().split('T')[0];
+
+/* ── FILE HANDLING ── */
 const dz=document.getElementById('dropZone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragging');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('dragging'));
@@ -317,7 +369,7 @@ function handleFile(file){
     imgBase64=e.target.result.split(',')[1];
     document.getElementById('previewImg').src=e.target.result;
     document.getElementById('previewWrap').style.display='block';
-    document.getElementById('nameWrap').style.display='block';
+    document.getElementById('inputsWrap').style.display='block';
     document.getElementById('revealBtn').classList.add('show');
     dz.style.display='none';
     document.getElementById('errorMsg').style.display='none';
@@ -325,53 +377,97 @@ function handleFile(file){
   r.readAsDataURL(file);
 }
 
-const phrases=["Time is reading the story written on your face...","The planets are aligning to reveal your truth...","KaalDrishti is gazing into your soul...","The cosmos is decoding your emotional frequency...","Stars are mapping the path of your destiny..."];
+const phrases=[
+  "Reading the cosmic story written on your face...",
+  "Aligning planets with your birth chart...",
+  "KaalDrishti is gazing deep into your soul...",
+  "Decoding your zodiac destiny...",
+  "The stars are revealing your emotional truth..."
+];
 
+/* ── MAIN ── */
 async function revealSoul(){
-  const name=document.getElementById('userName').value.trim()||'Cosmic Soul';
+  const dob=document.getElementById('dobInput').value;
+  if(!dob){
+    const em=document.getElementById('errorMsg');
+    em.style.display='block';em.textContent='✦ Please enter your Date of Birth';return;
+  }
   document.getElementById('uploadSection').style.display='none';
   document.getElementById('loadingSection').style.display='block';
   let pi=0;
   const iv=setInterval(()=>{pi=(pi+1)%phrases.length;document.getElementById('loadPhrase').textContent=phrases[pi];},2200);
   try{
-    const res=await fetch('/api/read',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageBase64:imgBase64,imageType:imgType,name})});
+    const res=await fetch('/api/read',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({imageBase64:imgBase64,imageType:imgType,dob})
+    });
     if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error||`Server error ${res.status}`);}
-    const reading=await res.json();clearInterval(iv);showResults(name,reading);
+    const reading=await res.json();
+    clearInterval(iv);
+    showResults(reading);
   }catch(err){
     clearInterval(iv);
     document.getElementById('loadingSection').style.display='none';
     document.getElementById('uploadSection').style.display='block';
-    const em=document.getElementById('errorMsg');em.style.display='block';em.textContent='✦ '+err.message;
+    const em=document.getElementById('errorMsg');em.style.display='block';
+    em.textContent='✦ '+err.message;
   }
 }
 
-function showResults(name,r){
+/* ── SHOW RESULTS ── */
+function showResults(r){
   document.getElementById('loadingSection').style.display='none';
   document.getElementById('resultsSection').style.display='block';
-  document.getElementById('resultsName').textContent=name;
-  animateCount('pctHappy',r.happy_pct,'%');animateCount('pctSometimes',r.sometimes_pct,'%');animateCount('pctSad',r.sad_pct,'%');
+
+  // Zodiac badge
+  document.getElementById('zodiacSymbol').textContent=r.zodiac_symbol||'⭐';
+  document.getElementById('zodiacSign').textContent=r.zodiac_sign||'';
+  document.getElementById('zodiacHindi').textContent=r.zodiac_hindi||'';
+
+  // Mood meter
+  animateCount('pctHappy',r.happy_pct,'%');
+  animateCount('pctSometimes',r.sometimes_pct,'%');
+  animateCount('pctSad',r.sad_pct,'%');
   const map={happy:'orbHappy',sometimes:'orbSometimes',sad:'orbSad'};
   const dom=map[r.dominant_mood]||'orbSometimes';
-  setTimeout(()=>{document.getElementById(dom).classList.add('active');Object.values(map).forEach(id=>{if(id!==dom)document.getElementById(id).style.opacity='.2';});},400);
-  document.getElementById('moodVerdict').textContent=r.mood_verdict;
-  const stripes=['stripe-saffron','stripe-cosmic','stripe-rose','stripe-teal'];
-  const cont=document.getElementById('readingCards');cont.innerHTML='';
-  r.sections.forEach((s,i)=>{
-    const c=document.createElement('div');c.className=`reading-card d${i+2}`;
-    c.innerHTML=`<div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div><div class="card-stripe ${stripes[i]||'stripe-saffron'}"></div><div class="card-head">${s.icon} ${s.label}</div><div class="card-body">${s.content}</div>`;
-    cont.appendChild(c);
+  setTimeout(()=>{
+    document.getElementById(dom).classList.add('active');
+    Object.values(map).forEach(id=>{if(id!==dom)document.getElementById(id).style.opacity='.2';});
+  },400);
+  document.getElementById('moodVerdict').textContent=r.face_verdict||'';
+
+  // Face reading cards
+  const faceContainer=document.getElementById('faceCards');
+  faceContainer.innerHTML='';
+  (r.face_sections||[]).forEach((s,i)=>{
+    const c=document.createElement('div');
+    c.className=`reading-card d${i+2}`;
+    c.innerHTML=`<div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div><div class="card-stripe ${s.stripe||'stripe-saffron'}"></div><div class="card-head">${s.icon} ${s.label}</div><div class="card-body">${s.content}</div>`;
+    faceContainer.appendChild(c);
   });
+
+  // Astro cards
+  const astroContainer=document.getElementById('astroCards');
+  astroContainer.innerHTML='';
+  (r.astro_sections||[]).forEach((s,i)=>{
+    const c=document.createElement('div');
+    c.className=`reading-card d${i+4}`;
+    c.innerHTML=`<div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div><div class="card-stripe ${s.stripe||'stripe-cosmic'}"></div><div class="card-head">${s.icon} ${s.label}</div><div class="card-body">${s.content}</div>`;
+    astroContainer.appendChild(c);
+  });
+
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function animateCount(id,target,suffix=''){
-  const el=document.getElementById(id);let cur=0;const step=Math.max(1,Math.ceil(target/40));
+  const el=document.getElementById(id);let cur=0;
+  const step=Math.max(1,Math.ceil(target/40));
   const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur+suffix;if(cur>=target)clearInterval(t);},28);
 }
 
 function shareReading(){
-  const name=document.getElementById('resultsName').textContent;
-  if(navigator.share){navigator.share({title:`${name} की KaalDrishti ✨`,text:'KaalDrishti ne mera bhavishya bataya! Aap bhi dekhein 🪐',url:window.location.href});}
+  if(navigator.share){navigator.share({title:`KaalDrishti Reading ✨`,text:'KaalDrishti ne mera bhavishya bataya! Aap bhi dekhein 🪐',url:window.location.href});}
   else{navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copy ho gaya! Share karo 🪐'));}
 }
 
@@ -379,13 +475,14 @@ function resetApp(){
   document.getElementById('resultsSection').style.display='none';
   document.getElementById('uploadSection').style.display='block';
   document.getElementById('previewWrap').style.display='none';
-  document.getElementById('nameWrap').style.display='none';
+  document.getElementById('inputsWrap').style.display='none';
   document.getElementById('revealBtn').classList.remove('show');
   dz.style.display='block';
   document.getElementById('errorMsg').style.display='none';
   document.getElementById('fileInput').value='';
-  document.getElementById('userName').value='';
-  document.getElementById('readingCards').innerHTML='';
+  document.getElementById('dobInput').value='';
+  document.getElementById('faceCards').innerHTML='';
+  document.getElementById('astroCards').innerHTML='';
   ['orbHappy','orbSometimes','orbSad'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('active');el.style.opacity='.2';});
   ['pctHappy','pctSometimes','pctSad'].forEach(id=>document.getElementById(id).textContent='—');
   imgBase64=null;window.scrollTo({top:0,behavior:'smooth'});
