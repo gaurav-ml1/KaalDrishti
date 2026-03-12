@@ -1,0 +1,8 @@
+{
+  "name": "soul-reader",
+  "version": "1.0.0",
+  "description": "Soul Reader — AI Mood & Future Predictor",
+  "engines": {
+    "node": "18.x"
+  }
+}
