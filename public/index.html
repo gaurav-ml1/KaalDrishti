@@ -7,141 +7,186 @@
 <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Hindi:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --space:#000;
-  --card:#0a0a0a;
-  --card2:#111;
-  --border:rgba(255,255,255,.1);
-  --white:#ffffff;
-  --white2:rgba(255,255,255,.85);
-  --white3:rgba(255,255,255,.55);
-  --white4:rgba(255,255,255,.25);
-  --saffron:#ff9933;
-  --gold:#f5c842;
-  --cosmic:#5b8fff;
-  --violet:#b94fff;
-  --rose:#ff6b9d;
-  --teal:#00e5cc;
-  --mystic:#9b6dff;
+  --space:#000;--card:#0d0d0d;--border:rgba(255,255,255,.09);
+  --w1:#ffffff;--w2:rgba(255,255,255,.82);--w3:rgba(255,255,255,.5);--w4:rgba(255,255,255,.22);
+  --saffron:#ff9933;--gold:#f5c842;--cosmic:#5b8fff;--rose:#ff6b9d;--teal:#00e5cc;--mystic:#9b6dff;
+  --green:#4ade80;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{background:var(--space);color:var(--white);font-family:'Tiro Devanagari Hindi',serif;min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+html,body{background:var(--space);}
+body{color:var(--w1);font-family:'Tiro Devanagari Hindi',serif;min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 #spaceCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 .container{position:relative;z-index:2;max-width:660px;margin:0 auto;padding:0 16px 100px;}
 @media(min-width:480px){.container{padding:0 24px 100px;}}
 
 /* HEADER */
-header{text-align:center;padding:38px 0 28px;}
-.kaal-emblem{width:82px;height:82px;margin:0 auto 16px;position:relative;}
-.emblem-planet{width:82px;height:82px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9933,#c97320 40%,#7a3d00 70%,#1a0800);box-shadow:0 0 0 1px rgba(255,153,51,.25),0 0 28px rgba(255,153,51,.35),0 0 70px rgba(255,153,51,.12),inset -12px -8px 25px rgba(0,0,0,.65);animation:breathe 6s ease-in-out infinite;}
-@keyframes breathe{0%,100%{box-shadow:0 0 0 1px rgba(255,153,51,.25),0 0 28px rgba(255,153,51,.35),0 0 70px rgba(255,153,51,.12),inset -12px -8px 25px rgba(0,0,0,.65);}50%{box-shadow:0 0 0 1px rgba(255,153,51,.5),0 0 50px rgba(255,153,51,.55),0 0 110px rgba(255,153,51,.25),inset -12px -8px 25px rgba(0,0,0,.65);}}
-.emblem-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(75deg);width:124px;height:124px;border-radius:50%;border:2px solid rgba(245,200,66,.45);animation:rspin 8s linear infinite;}
+header{text-align:center;padding:36px 0 26px;}
+.kaal-emblem{width:80px;height:80px;margin:0 auto 16px;position:relative;}
+.emblem-planet{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9933,#c97320 40%,#7a3d00 70%,#1a0800);box-shadow:0 0 28px rgba(255,153,51,.35),0 0 70px rgba(255,153,51,.12),inset -12px -8px 25px rgba(0,0,0,.65);animation:breathe 6s ease-in-out infinite;}
+@keyframes breathe{0%,100%{box-shadow:0 0 28px rgba(255,153,51,.35),0 0 70px rgba(255,153,51,.12),inset -12px -8px 25px rgba(0,0,0,.65);}50%{box-shadow:0 0 50px rgba(255,153,51,.55),0 0 110px rgba(255,153,51,.25),inset -12px -8px 25px rgba(0,0,0,.65);}}
+.emblem-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(75deg);width:122px;height:122px;border-radius:50%;border:2px solid rgba(245,200,66,.4);animation:rspin 8s linear infinite;}
 @keyframes rspin{to{transform:translate(-50%,-50%) rotateX(75deg) rotateZ(360deg);}}
 .emblem-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--gold);top:-3.5px;left:50%;transform:translateX(-50%);box-shadow:0 0 8px var(--gold);}
-.app-name{font-family:'Yatra One',serif;font-size:clamp(30px,9vw,60px);color:var(--white);letter-spacing:3px;line-height:1.1;margin-bottom:5px;text-shadow:0 0 40px rgba(255,153,51,.3);}
-.app-sub{font-style:italic;font-size:clamp(11px,3vw,14px);color:var(--white4);letter-spacing:4px;text-transform:uppercase;}
-.divider{width:160px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);margin:14px auto;position:relative;}
-.divider::before{content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--white3);font-size:9px;background:var(--space);padding:0 8px;}
+.app-name{font-family:'Yatra One',serif;font-size:clamp(30px,9vw,60px);color:var(--w1);letter-spacing:3px;line-height:1.1;margin-bottom:4px;text-shadow:0 0 40px rgba(255,153,51,.25);}
+.app-sub{font-style:italic;font-size:clamp(11px,3vw,14px);color:var(--w4);letter-spacing:4px;text-transform:uppercase;}
+.divider{width:150px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);margin:13px auto;position:relative;}
+.divider::before{content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--w3);font-size:9px;background:var(--space);padding:0 7px;}
 
-/* CARD */
-.card{background:var(--card);border:1px solid var(--border);padding:clamp(18px,5vw,32px) clamp(14px,5vw,28px);margin-bottom:16px;position:relative;overflow:hidden;}
-.cc{position:absolute;width:12px;height:12px;border-color:rgba(255,255,255,.15);border-style:solid;}
-.cc-tl{top:7px;left:7px;border-width:1px 0 0 1px;}
-.cc-tr{top:7px;right:7px;border-width:1px 1px 0 0;}
-.cc-bl{bottom:7px;left:7px;border-width:0 0 1px 1px;}
-.cc-br{bottom:7px;right:7px;border-width:0 1px 1px 0;}
+/* CARD BASE */
+.card{background:var(--card);border:1px solid var(--border);padding:clamp(18px,5vw,30px) clamp(14px,5vw,26px);margin-bottom:14px;position:relative;overflow:hidden;}
+.cc{position:absolute;width:11px;height:11px;border-color:rgba(255,255,255,.12);border-style:solid;}
+.cc-tl{top:6px;left:6px;border-width:1px 0 0 1px;}.cc-tr{top:6px;right:6px;border-width:1px 1px 0 0;}
+.cc-bl{bottom:6px;left:6px;border-width:0 0 1px 1px;}.cc-br{bottom:6px;right:6px;border-width:0 1px 1px 0;}
 
 /* SELFIE ZONE */
-.selfie-zone{border:1px dashed rgba(255,255,255,.15);padding:clamp(28px,8vw,44px) 16px;text-align:center;cursor:pointer;transition:all .3s;touch-action:manipulation;}
-.selfie-zone:hover,.selfie-zone.drag{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.02);}
-.selfie-icon{font-size:clamp(44px,12vw,58px);display:block;margin-bottom:14px;animation:float 4s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.selfie-title{font-family:'Yatra One',serif;font-size:clamp(15px,4vw,19px);color:var(--white);letter-spacing:1px;margin-bottom:7px;}
-.selfie-sub{color:var(--white4);font-style:italic;font-size:clamp(12px,3vw,14px);line-height:1.7;}
+.selfie-zone{border:1px dashed rgba(255,255,255,.13);padding:clamp(26px,8vw,42px) 16px;text-align:center;cursor:pointer;transition:all .3s;touch-action:manipulation;}
+.selfie-zone:hover,.selfie-zone.drag{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.015);}
+.selfie-icon{font-size:clamp(44px,12vw,56px);display:block;margin-bottom:12px;animation:float 4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+.selfie-title{font-family:'Yatra One',serif;font-size:clamp(15px,4.2vw,19px);color:var(--w1);letter-spacing:1px;margin-bottom:6px;}
+.selfie-sub{color:var(--w4);font-style:italic;font-size:clamp(12px,3vw,14px);line-height:1.7;}
 #fileInput{display:none;}
 
-/* PREVIEW */
-#previewWrap{display:none;text-align:center;padding:clamp(22px,6vw,36px) 0 16px;}
-.orbit-system{position:relative;display:inline-block;}
-.oring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid;animation:ospin linear infinite;}
-.or1{width:clamp(208px,60vw,252px);height:clamp(208px,60vw,252px);border-color:rgba(255,255,255,.08);animation-duration:14s;}
-.or2{width:clamp(248px,72vw,296px);height:clamp(248px,72vw,296px);border-color:rgba(255,255,255,.05);border-style:dashed;animation-duration:24s;animation-direction:reverse;}
-@keyframes ospin{to{transform:translate(-50%,-50%) rotate(360deg);}}
-.odot{position:absolute;border-radius:50%;top:0;left:50%;transform:translateX(-50%);}
-.od1{width:7px;height:7px;background:var(--saffron);box-shadow:0 0 8px var(--saffron);margin:-3.5px 0 0 -3.5px;}
-.od2{width:5px;height:5px;background:var(--cosmic);box-shadow:0 0 6px var(--cosmic);margin:-2.5px 0 0 -2.5px;}
-#previewImg{width:clamp(168px,48vw,200px);height:clamp(168px,48vw,200px);border-radius:50%;object-fit:cover;display:block;border:2px solid rgba(255,255,255,.2);box-shadow:0 0 0 4px rgba(255,255,255,.04),0 0 40px rgba(255,153,51,.2);}
+/* PHOTO LOADING STATE */
+#photoLoadWrap{display:none;text-align:center;padding:clamp(20px,5vw,32px) 0 16px;}
+.photo-ring-system{position:relative;display:inline-block;width:clamp(210px,60vw,254px);height:clamp(210px,60vw,254px);}
+.photo-preview-img{
+  position:absolute;top:50%;left:50%;
+  width:clamp(152px,44vw,182px);height:clamp(152px,44vw,182px);
+  transform:translate(-50%,-50%) scaleX(-1); /* mirror flip fix */
+  border-radius:50%;object-fit:cover;
+  border:2px solid rgba(255,255,255,.18);
+}
+/* Spinning loading ring around photo */
+.photo-spin-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--w1);
+  border-right-color:rgba(255,255,255,.3);
+  animation:photo-spin 1.2s linear infinite;
+}
+.photo-spin-ring-2{
+  position:absolute;inset:6px;border-radius:50%;
+  border:1px solid transparent;
+  border-bottom-color:rgba(255,255,255,.25);
+  border-left-color:rgba(255,255,255,.1);
+  animation:photo-spin 2s linear infinite reverse;
+}
+@keyframes photo-spin{to{transform:rotate(360deg);}}
+.photo-load-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--w4);text-transform:uppercase;margin-top:14px;animation:flicker 1.8s ease-in-out infinite;}
+@keyframes flicker{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* STATIC PREVIEW (after result loads) */
+#previewWrap{display:none;text-align:center;padding:clamp(20px,5vw,32px) 0 14px;}
+#previewImg{
+  width:clamp(152px,44vw,182px);height:clamp(152px,44vw,182px);
+  border-radius:50%;object-fit:cover;
+  border:2px solid rgba(255,255,255,.2);
+  transform:scaleX(-1); /* mirror flip fix */
+  box-shadow:0 0 30px rgba(255,153,51,.15);
+  display:inline-block;
+}
 
 /* CTA */
-.reveal-btn{display:none;width:100%;margin-top:18px;padding:clamp(16px,4.5vw,20px) 16px;background:#fff;border:none;color:#000;font-family:'Yatra One',serif;font-size:clamp(14px,3.8vw,17px);letter-spacing:2px;cursor:pointer;transition:all .3s;touch-action:manipulation;font-weight:700;}
-.reveal-btn:hover{background:rgba(255,255,255,.88);transform:translateY(-1px);box-shadow:0 8px 30px rgba(255,255,255,.15);}
+.reveal-btn{display:none;width:100%;margin-top:16px;padding:clamp(15px,4.2vw,19px) 16px;background:var(--w1);border:none;color:#000;font-family:'Yatra One',serif;font-size:clamp(14px,3.8vw,17px);letter-spacing:2px;cursor:pointer;transition:all .3s;touch-action:manipulation;}
+.reveal-btn:hover{background:rgba(255,255,255,.88);transform:translateY(-1px);box-shadow:0 8px 28px rgba(255,255,255,.13);}
 .reveal-btn:active{transform:scale(.98);}
 .reveal-btn.show{display:block;}
 
-/* LOADING */
-#loadingSection{display:none;text-align:center;padding:clamp(50px,13vw,76px) 20px;}
-.solar-loader{position:relative;width:130px;height:130px;margin:0 auto 28px;}
-.sun-core{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#fff,var(--saffron) 50%,#7a3000);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:sunpulse 2s ease-in-out infinite;}
-@keyframes sunpulse{0%,100%{box-shadow:0 0 18px var(--saffron),0 0 50px rgba(255,153,51,.35);}50%{box-shadow:0 0 30px var(--saffron),0 0 80px rgba(255,153,51,.55);}}
+/* FULL SCREEN LOADING */
+#loadingSection{display:none;text-align:center;padding:clamp(48px,12vw,72px) 20px;}
+.solar-loader{position:relative;width:120px;height:120px;margin:0 auto 26px;}
+.sun-core{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#fff,var(--saffron) 50%,#7a3000);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:sunpulse 2s ease-in-out infinite;}
+@keyframes sunpulse{0%,100%{box-shadow:0 0 16px var(--saffron),0 0 45px rgba(255,153,51,.3);}50%{box-shadow:0 0 28px var(--saffron),0 0 75px rgba(255,153,51,.5);}}
 .lorbit{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid;animation:ospin linear infinite;}
-.lo1{width:74px;height:74px;border-color:rgba(255,255,255,.2);animation-duration:1.8s;}
-.lo2{width:102px;height:102px;border-color:rgba(255,255,255,.12);animation-duration:3.2s;animation-direction:reverse;border-style:dashed;}
-.lo3{width:130px;height:130px;border-color:rgba(255,255,255,.06);animation-duration:5.5s;}
+.lo1{width:70px;height:70px;border-color:rgba(255,255,255,.18);animation-duration:1.7s;}
+.lo2{width:96px;height:96px;border-color:rgba(255,255,255,.1);animation-duration:3s;animation-direction:reverse;border-style:dashed;}
+.lo3{width:120px;height:120px;border-color:rgba(255,255,255,.05);animation-duration:5s;}
+@keyframes ospin{to{transform:translate(-50%,-50%) rotate(360deg);}}
 .lplanet{position:absolute;border-radius:50%;top:0;left:50%;transform:translateX(-50%);}
-.lp1{width:8px;height:8px;background:var(--white);box-shadow:0 0 8px var(--white);margin:-4px 0 0 -4px;}
-.lp2{width:6px;height:6px;background:var(--white3);box-shadow:0 0 6px var(--white3);margin:-3px 0 0 -3px;}
-.lp3{width:5px;height:5px;background:var(--white4);box-shadow:0 0 5px var(--white4);margin:-2.5px 0 0 -2.5px;}
-.load-title{font-family:'Yatra One',serif;font-size:clamp(15px,4vw,20px);color:var(--white);letter-spacing:2px;animation:flicker 2.5s ease-in-out infinite;margin-bottom:10px;}
-@keyframes flicker{0%,100%{opacity:.3}50%{opacity:1}}
-.load-sub{font-style:italic;color:var(--white4);font-size:clamp(13px,3.5vw,15px);padding:0 16px;line-height:1.7;}
+.lp1{width:7px;height:7px;background:var(--w1);box-shadow:0 0 7px var(--w1);margin:-3.5px 0 0 -3.5px;}
+.lp2{width:5px;height:5px;background:var(--w3);box-shadow:0 0 5px var(--w3);margin:-2.5px 0 0 -2.5px;}
+.load-title{font-family:'Yatra One',serif;font-size:clamp(15px,4vw,19px);color:var(--w1);letter-spacing:2px;animation:flicker 2.5s ease-in-out infinite;margin-bottom:9px;}
+.load-sub{font-style:italic;color:var(--w4);font-size:clamp(13px,3.5vw,15px);padding:0 16px;line-height:1.7;}
 
 /* RESULTS */
 #resultsSection{display:none;}
-.results-top{text-align:center;padding:clamp(20px,5vw,34px) 0 16px;}
-.results-title{font-family:'Yatra One',serif;font-size:clamp(14px,4vw,18px);color:var(--white3);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;}
+.results-top{text-align:center;padding:clamp(18px,5vw,30px) 0 14px;}
+.results-title{font-family:'Yatra One',serif;font-size:clamp(13px,3.8vw,17px);color:var(--w3);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;}
 
 /* SINGLE MOOD */
-.mood-card{background:var(--card);border:1px solid var(--border);padding:clamp(18px,5vw,28px);margin-bottom:16px;text-align:center;position:relative;animation:reveal .5s ease forwards;opacity:0;transform:translateY(14px);}
+.mood-card{background:var(--card);border:1px solid var(--border);padding:clamp(18px,5vw,26px);margin-bottom:14px;text-align:center;position:relative;animation:reveal .5s ease forwards;opacity:0;transform:translateY(13px);}
 @keyframes reveal{to{opacity:1;transform:translateY(0);}}
-.mood-section-label{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:3px;color:var(--white4);text-transform:uppercase;margin-bottom:20px;}
-.single-mood-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:4px 0 18px;}
-.single-orb{display:flex;flex-direction:column;align-items:center;gap:10px;animation:entrance .8s cubic-bezier(.175,.885,.32,1.275) forwards;}
-@keyframes entrance{from{transform:scale(.3);opacity:0;}to{transform:scale(1);opacity:1;}}
-.single-planet{font-size:clamp(60px,17vw,84px);filter:drop-shadow(0 0 18px var(--orb-glow,rgba(255,153,51,.4)));animation:sfloat 3.5s ease-in-out infinite;}
-@keyframes sfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.single-pct{font-family:'Yatra One',serif;font-size:clamp(40px,11vw,62px);color:var(--white);line-height:1;}
-.single-label{font-family:'Space Mono',monospace;font-size:clamp(10px,2.5vw,12px);letter-spacing:3px;text-transform:uppercase;color:var(--white3);}
-.motivate-badge{display:none;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:10px 18px;font-family:'Tiro Devanagari Hindi',serif;font-style:italic;font-size:clamp(13px,3.5vw,15px);color:var(--white2);animation:badgepulse 2.5s ease-in-out infinite;}
-@keyframes badgepulse{0%,100%{border-color:rgba(255,255,255,.12);}50%{border-color:rgba(255,255,255,.3);}}
-.main-verdict{font-style:italic;font-size:clamp(14px,4vw,17px);color:var(--white2);line-height:1.9;padding:2px 4px 0;}
+.mood-section-label{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:3px;color:var(--w4);text-transform:uppercase;margin-bottom:18px;}
+.single-mood-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:4px 0 16px;}
+.single-orb{display:flex;flex-direction:column;align-items:center;gap:9px;animation:entrance .7s cubic-bezier(.175,.885,.32,1.275) forwards;}
+@keyframes entrance{from{transform:scale(.25);opacity:0;}to{transform:scale(1);opacity:1;}}
+.single-planet{font-size:clamp(58px,16vw,80px);filter:drop-shadow(0 0 16px var(--orb-glow,rgba(255,153,51,.4)));animation:sfloat 3.5s ease-in-out infinite;}
+@keyframes sfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.single-pct{font-family:'Yatra One',serif;font-size:clamp(38px,11vw,60px);color:var(--w1);line-height:1;}
+.single-label{font-family:'Space Mono',monospace;font-size:clamp(10px,2.4vw,12px);letter-spacing:3px;text-transform:uppercase;color:var(--w3);}
+.motivate-badge{display:none;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:9px 16px;font-style:italic;font-size:clamp(13px,3.4vw,15px);color:var(--w2);animation:badgepulse 2.5s ease-in-out infinite;}
+@keyframes badgepulse{0%,100%{border-color:rgba(255,255,255,.1);}50%{border-color:rgba(255,255,255,.28);}}
+.main-verdict{font-style:italic;font-size:clamp(14px,3.8vw,17px);color:var(--w2);line-height:1.9;padding:2px 4px 0;}
 
-/* READING CARDS */
-.reading-card{background:var(--card);border:1px solid var(--border);padding:clamp(16px,4vw,26px) clamp(14px,4vw,28px);margin-bottom:12px;position:relative;overflow:hidden;animation:reveal .6s ease forwards;opacity:0;transform:translateY(14px);}
+/* READING CARDS — TWO COLUMN INSIDE */
+.reading-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:clamp(14px,3.8vw,24px) clamp(12px,3.8vw,24px);
+  margin-bottom:11px;position:relative;overflow:hidden;
+  animation:reveal .6s ease forwards;opacity:0;transform:translateY(13px);
+}
 .card-stripe{position:absolute;top:0;left:0;width:2px;height:100%;}
 .stripe-saffron{background:linear-gradient(180deg,var(--saffron),transparent);}
 .stripe-cosmic{background:linear-gradient(180deg,var(--cosmic),transparent);}
 .stripe-rose{background:linear-gradient(180deg,var(--rose),transparent);}
 .stripe-teal{background:linear-gradient(180deg,var(--teal),transparent);}
 .stripe-gold{background:linear-gradient(180deg,var(--gold),transparent);}
-.card-head{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:3px;color:var(--white3);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.card-head::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07);}
-.card-body{font-size:clamp(15px,4vw,17px);line-height:2;color:var(--white2);}
+.card-head{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(8px,2vw,10px);letter-spacing:3px;
+  color:var(--w3);text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:7px;
+}
+.card-head::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06);}
+
+/* Two column layout for observation + improvement */
+.card-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:420px){.card-cols{grid-template-columns:1fr;gap:10px;}}
+
+.col-observe{
+  padding:10px 12px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+}
+.col-improve{
+  padding:10px 12px;
+  background:rgba(74,222,128,.04);
+  border:1px solid rgba(74,222,128,.12);
+}
+.col-tag{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(7px,1.8vw,9px);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:5px;
+}
+.col-tag-observe{color:var(--w4);}
+.col-tag-improve{color:rgba(74,222,128,.7);}
+.col-body{font-size:clamp(13px,3.5vw,15px);line-height:1.85;color:var(--w2);}
+.col-improve .col-body{color:rgba(220,255,230,.85);}
 
 /* ACTIONS */
-.action-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;}
-.action-btn{padding:clamp(13px,3.5vw,16px) 8px;border:1px solid rgba(255,255,255,.15);font-family:'Space Mono',monospace;font-size:clamp(9px,2vw,10px);letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--white2);transition:all .3s;touch-action:manipulation;}
-.action-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.35);}
-.action-btn:active{opacity:.65;transform:scale(.97);}
-
-.error-msg{display:none;text-align:center;padding:12px 14px;border:1px solid rgba(255,107,157,.3);color:var(--rose);font-style:italic;font-size:clamp(12px,3.3vw,14px);margin-top:12px;line-height:1.6;}
-.d1{animation-delay:.04s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}.d5{animation-delay:.44s}.d6{animation-delay:.54s}
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.action-btn{padding:clamp(13px,3.5vw,15px) 8px;border:1px solid rgba(255,255,255,.13);font-family:'Space Mono',monospace;font-size:clamp(9px,2vw,10px);letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--w2);transition:all .3s;touch-action:manipulation;}
+.action-btn:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.3);}
+.action-btn:active{opacity:.6;transform:scale(.97);}
+.error-msg{display:none;text-align:center;padding:11px 13px;border:1px solid rgba(255,107,157,.28);color:var(--rose);font-style:italic;font-size:clamp(12px,3.2vw,14px);margin-top:11px;line-height:1.6;}
+.d1{animation-delay:.04s}.d2{animation-delay:.13s}.d3{animation-delay:.22s}.d4{animation-delay:.31s}.d5{animation-delay:.40s}.d6{animation-delay:.49s}
 </style>
 </head>
 <body>
-
 <canvas id="spaceCanvas"></canvas>
 
 <div class="container">
-
   <header>
     <div class="kaal-emblem">
       <div class="emblem-planet"></div>
@@ -156,19 +201,30 @@ header{text-align:center;padding:38px 0 28px;}
   <div id="uploadSection">
     <div class="card">
       <div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div>
+
+      <!-- Drop zone -->
       <div class="selfie-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
         <span class="selfie-icon">🤳</span>
         <div class="selfie-title">Apni Selfie Upload Karo</div>
         <p class="selfie-sub">Seedha camera dekho — aankhein clearly dikhni chahiye<br>KaalDrishti tera chehra padh ke sach batayega</p>
         <input type="file" id="fileInput" accept="image/*" capture="user">
       </div>
-      <div id="previewWrap">
-        <div class="orbit-system">
-          <div class="oring or1"><div class="odot od1"></div></div>
-          <div class="oring or2"><div class="odot od2"></div></div>
-          <img id="previewImg" src="" alt="Teri photo">
+
+      <!-- Photo + loading ring (shown while API processes) -->
+      <div id="photoLoadWrap">
+        <div class="photo-ring-system">
+          <div class="photo-spin-ring"></div>
+          <div class="photo-spin-ring-2"></div>
+          <img id="photoLoadImg" class="photo-preview-img" src="" alt="">
         </div>
+        <div class="photo-load-label">Padha Ja Raha Hai...</div>
       </div>
+
+      <!-- Static preview (before clicking button) -->
+      <div id="previewWrap">
+        <img id="previewImg" src="" alt="Teri photo">
+      </div>
+
       <button class="reveal-btn" id="revealBtn" onclick="revealSoul()">
         👁️ &nbsp; Mera Chehra Padho
       </button>
@@ -176,12 +232,12 @@ header{text-align:center;padding:38px 0 28px;}
     </div>
   </div>
 
-  <!-- LOADING -->
+  <!-- LOADING (full screen) -->
   <div id="loadingSection">
     <div class="solar-loader">
       <div class="lorbit lo1"><div class="lplanet lp1"></div></div>
       <div class="lorbit lo2"><div class="lplanet lp2"></div></div>
-      <div class="lorbit lo3"><div class="lplanet lp3"></div></div>
+      <div class="lorbit lo3"></div>
       <div class="sun-core"></div>
     </div>
     <div class="load-title">Chehra Padha Ja Raha Hai...</div>
@@ -191,27 +247,27 @@ header{text-align:center;padding:38px 0 28px;}
   <!-- RESULTS -->
   <div id="resultsSection">
     <div class="results-top">
-      <div style="font-family:'Yatra One',serif;font-size:18px;letter-spacing:7px;color:var(--white4);margin-bottom:10px;">✦ ॐ ✦</div>
+      <div style="font-family:'Yatra One',serif;font-size:17px;letter-spacing:7px;color:var(--w4);margin-bottom:9px;">✦ ॐ ✦</div>
       <div class="results-title">Teri Drishti Khul Gayi</div>
       <div class="divider"></div>
     </div>
 
+    <!-- MOOD -->
     <div class="mood-card d1">
       <div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div>
       <div class="mood-section-label">Chehra Kya Kehta Hai</div>
       <div class="single-mood-wrap">
-        <div class="single-orb" id="singleOrb">
+        <div class="single-orb">
           <div class="single-planet" id="singlePlanet">🌗</div>
           <div class="single-pct" id="singlePct">—</div>
           <div class="single-label" id="singleLabel">—</div>
         </div>
-        <div class="motivate-badge" id="motivateBadge">
-          💫 &nbsp;Himmat Rakho — Sab Theek Hoga
-        </div>
+        <div class="motivate-badge" id="motivateBadge">💫 &nbsp;Himmat Rakho — Sab Theek Hoga</div>
       </div>
       <div class="main-verdict" id="mainVerdict"></div>
     </div>
 
+    <!-- READING CARDS -->
     <div id="readingCards"></div>
 
     <div class="action-row">
@@ -219,43 +275,39 @@ header{text-align:center;padding:38px 0 28px;}
       <button class="action-btn" onclick="resetApp()">↺ Dobara Padho</button>
     </div>
   </div>
-
 </div>
 
 <script>
 /* SPACE CANVAS */
 (function(){
-  const cv=document.getElementById('spaceCanvas');
-  const cx=cv.getContext('2d');
+  const cv=document.getElementById('spaceCanvas'),cx=cv.getContext('2d');
   let W,H,stars=[],comets=[];
   function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
-  for(let i=0;i<260;i++) stars.push({x:Math.random()*5000,y:Math.random()*5000,r:Math.random()*1.3+.15,a:Math.random(),da:(Math.random()*.005+.001)*(Math.random()<.5?1:-1),s:Math.random()*.07+.015});
+  for(let i=0;i<250;i++) stars.push({x:Math.random()*5000,y:Math.random()*5000,r:Math.random()*1.2+.15,a:Math.random(),da:(Math.random()*.005+.001)*(Math.random()<.5?1:-1),s:Math.random()*.07+.015});
   function spawnComet(){comets.push({x:Math.random()*W*.5,y:Math.random()*H*.3,vx:3.5+Math.random()*4,vy:2+Math.random()*3,life:1,tail:[]});}
   spawnComet();setInterval(spawnComet,4000);
   let t=0;
   function draw(){
-    cx.clearRect(0,0,W,H);
     cx.fillStyle='#000';cx.fillRect(0,0,W,H);
     t+=.004;
     for(const s of stars){
       s.a+=s.da;if(s.a>1||s.a<0)s.da*=-1;
-      const sx=(s.x+t*s.s*100)%W,sy=(s.y+t*s.s*28)%H;
-      cx.beginPath();cx.arc(sx,sy,s.r,0,Math.PI*2);
-      cx.fillStyle=`rgba(255,255,255,${Math.max(0,Math.min(.9,s.a))})`;cx.fill();
+      cx.beginPath();cx.arc((s.x+t*s.s*100)%W,(s.y+t*s.s*28)%H,s.r,0,Math.PI*2);
+      cx.fillStyle=`rgba(255,255,255,${Math.max(0,Math.min(.88,s.a))})`;cx.fill();
     }
     for(let i=comets.length-1;i>=0;i--){
       const c=comets[i];c.x+=c.vx;c.y+=c.vy;c.tail.push({x:c.x,y:c.y});
-      if(c.tail.length>18)c.tail.shift();c.life-=.009;
+      if(c.tail.length>16)c.tail.shift();c.life-=.009;
       if(c.life<=0||c.x>W+200||c.y>H+200){comets.splice(i,1);continue;}
       if(c.tail.length>1){
         cx.beginPath();cx.moveTo(c.tail[0].x,c.tail[0].y);
         for(let j=1;j<c.tail.length;j++)cx.lineTo(c.tail[j].x,c.tail[j].y);
         const tg=cx.createLinearGradient(c.tail[0].x,c.tail[0].y,c.x,c.y);
-        tg.addColorStop(0,'transparent');tg.addColorStop(1,`rgba(255,255,255,${c.life*.7})`);
+        tg.addColorStop(0,'transparent');tg.addColorStop(1,`rgba(255,255,255,${c.life*.65})`);
         cx.strokeStyle=tg;cx.lineWidth=1.5;cx.stroke();
       }
-      cx.beginPath();cx.arc(c.x,c.y,2,0,Math.PI*2);
+      cx.beginPath();cx.arc(c.x,c.y,1.8,0,Math.PI*2);
       cx.fillStyle=`rgba(255,255,255,${c.life})`;cx.fill();
     }
     requestAnimationFrame(draw);
@@ -263,7 +315,7 @@ header{text-align:center;padding:38px 0 28px;}
   draw();
 })();
 
-/* FILE */
+/* FILE HANDLING */
 const dz=document.getElementById('dropZone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
@@ -271,11 +323,13 @@ dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');co
 document.getElementById('fileInput').addEventListener('change',e=>{if(e.target.files[0])handleFile(e.target.files[0]);});
 
 let imgBase64=null,imgType='image/jpeg';
+
 function handleFile(file){
   imgType=file.type||'image/jpeg';
   const r=new FileReader();
   r.onload=e=>{
     imgBase64=e.target.result.split(',')[1];
+    // Show static preview
     document.getElementById('previewImg').src=e.target.result;
     document.getElementById('previewWrap').style.display='block';
     document.getElementById('revealBtn').classList.add('show');
@@ -294,77 +348,105 @@ const phrases=[
 ];
 
 async function revealSoul(){
-  document.getElementById('uploadSection').style.display='none';
-  document.getElementById('loadingSection').style.display='block';
+  // Hide button, show photo with loading ring
+  document.getElementById('revealBtn').style.display='none';
+  document.getElementById('previewWrap').style.display='none';
+  document.getElementById('photoLoadImg').src=document.getElementById('previewImg').src;
+  document.getElementById('photoLoadWrap').style.display='block';
+
   let pi=0;
-  const iv=setInterval(()=>{pi=(pi+1)%phrases.length;document.getElementById('loadPhrase').textContent=phrases[pi];},2000);
+  const iv=setInterval(()=>{
+    pi=(pi+1)%phrases.length;
+    const el=document.getElementById('loadPhrase');
+    if(el) el.textContent=phrases[pi];
+  },2000);
+
   try{
     const res=await fetch('/api/read',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({imageBase64:imgBase64,imageType:imgType})
+      body:JSON.stringify({imageBase64,imageType})
     });
     if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error||`Server error ${res.status}`);}
     const reading=await res.json();
-    clearInterval(iv);showResults(reading);
+    clearInterval(iv);
+
+    // Hide upload section entirely, show results
+    document.getElementById('uploadSection').style.display='none';
+    showResults(reading);
+
   }catch(err){
     clearInterval(iv);
-    document.getElementById('loadingSection').style.display='none';
-    document.getElementById('uploadSection').style.display='block';
-    const em=document.getElementById('errorMsg');em.style.display='block';
-    em.textContent='✦ '+err.message;
+    // Reset upload section on error
+    document.getElementById('photoLoadWrap').style.display='none';
+    document.getElementById('previewWrap').style.display='block';
+    document.getElementById('revealBtn').classList.add('show');
+    document.getElementById('revealBtn').style.display='block';
+    const em=document.getElementById('errorMsg');
+    em.style.display='block';em.textContent='✦ '+err.message;
   }
 }
 
 function showResults(r){
-  document.getElementById('loadingSection').style.display='none';
   document.getElementById('resultsSection').style.display='block';
 
   const moodMap={
-    happy:    {emoji:'☀️', glow:'rgba(255,153,51,.45)'},
-    sometimes:{emoji:'🌗', glow:'rgba(91,143,255,.45)'},
-    sad:      {emoji:'🌊', glow:'rgba(0,229,204,.45)'}
+    happy:    {emoji:'☀️',glow:'rgba(255,153,51,.4)'},
+    sometimes:{emoji:'🌗',glow:'rgba(91,143,255,.4)'},
+    sad:      {emoji:'🌊',glow:'rgba(0,229,204,.4)'}
   };
   const mood=r.dominant_mood||'sometimes';
   const cfg=moodMap[mood]||moodMap.sometimes;
-
   document.getElementById('singlePlanet').textContent=cfg.emoji;
   document.getElementById('singlePlanet').style.setProperty('--orb-glow',cfg.glow);
   document.getElementById('singleLabel').textContent=r.mood_label||mood;
 
-  // Animate %
   let cur=0;const target=r.dominant_pct||0;
   const step=Math.max(1,Math.ceil(target/40));
   const ti=setInterval(()=>{cur=Math.min(cur+step,target);document.getElementById('singlePct').textContent=cur+'%';if(cur>=target)clearInterval(ti);},28);
 
-  if(r.motivational){
-    const b=document.getElementById('motivateBadge');
-    b.style.display='flex';
-  }
-
+  if(r.motivational) document.getElementById('motivateBadge').style.display='flex';
   document.getElementById('mainVerdict').textContent=r.main_verdict||'';
 
   const stripes=['stripe-saffron','stripe-cosmic','stripe-gold','stripe-rose','stripe-teal'];
   const cont=document.getElementById('readingCards');cont.innerHTML='';
+
   (r.sections||[]).forEach((s,i)=>{
     const c=document.createElement('div');
     c.className=`reading-card d${i+2}`;
-    c.innerHTML=`<div class="cc cc-tl"></div><div class="cc cc-tr"></div><div class="cc cc-bl"></div><div class="cc cc-br"></div><div class="card-stripe ${stripes[i]||'stripe-saffron'}"></div><div class="card-head">${s.icon} ${s.label}</div><div class="card-body">${s.content}</div>`;
+    c.innerHTML=`
+      <div class="cc cc-tl"></div><div class="cc cc-tr"></div>
+      <div class="cc cc-bl"></div><div class="cc cc-br"></div>
+      <div class="card-stripe ${stripes[i]||'stripe-saffron'}"></div>
+      <div class="card-head">${s.icon} ${s.label}</div>
+      <div class="card-cols">
+        <div class="col-observe">
+          <div class="col-tag col-tag-observe">👁 Jo Dikh Raha Hai</div>
+          <div class="col-body">${s.observation||''}</div>
+        </div>
+        <div class="col-improve">
+          <div class="col-tag col-tag-improve">✦ Improve Karo</div>
+          <div class="col-body">${s.improvement||''}</div>
+        </div>
+      </div>`;
     cont.appendChild(c);
   });
+
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function shareReading(){
-  if(navigator.share){navigator.share({title:'KaalDrishti ✨',text:'KaalDrishti ne mera chehra padh liya! Tu bhi try kar 🪐',url:window.location.href});}
-  else{navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copy ho gaya! Share karo 🪐'));}
+  if(navigator.share) navigator.share({title:'KaalDrishti ✨',text:'KaalDrishti ne mera chehra padh liya! Tu bhi try kar 🪐',url:window.location.href});
+  else navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copy ho gaya! Share karo 🪐'));
 }
 
 function resetApp(){
   document.getElementById('resultsSection').style.display='none';
   document.getElementById('uploadSection').style.display='block';
+  document.getElementById('photoLoadWrap').style.display='none';
   document.getElementById('previewWrap').style.display='none';
   document.getElementById('revealBtn').classList.remove('show');
+  document.getElementById('revealBtn').style.display='';
   dz.style.display='block';
   document.getElementById('errorMsg').style.display='none';
   document.getElementById('fileInput').value='';
@@ -372,7 +454,8 @@ function resetApp(){
   document.getElementById('singlePct').textContent='—';
   document.getElementById('singleLabel').textContent='—';
   document.getElementById('motivateBadge').style.display='none';
-  imgBase64=null;window.scrollTo({top:0,behavior:'smooth'});
+  imgBase64=null;
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 </body>
