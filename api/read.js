@@ -12,59 +12,63 @@ export default async function handler(req, res) {
 
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  const { imageBase64, imageType, name } = req.body;
-  if (!imageBase64 || !name) {
-    return res.status(400).json({ error: 'Photo ya naam missing hai bhai' });
+  const { imageBase64, imageType } = req.body;
+  if (!imageBase64) {
+    return res.status(400).json({ error: 'Photo missing hai bhai' });
   }
 
   const prompt = `Tu KaalDrishti hai — ek ancient soul reader jo sirf chehra dekh ke insaan ki poori kahani padh leta hai.
 
-Is insaan ka naam hai: ${name}
-
-Inki photo dekh aur BAHUT GEHRI face reading kar. Har cheez notice kar:
+Is insaan ki photo dekh aur BAHUT GEHRI face reading kar:
 - Aankhein: kya chupaati hain, kya bolti hain, andar ki feeling
-- Maatha, naak, hont, jawline — kya reveal karta hai character ke baare mein
+- Maatha, naak, hont, jawline — character ke baare mein kya bolta hai
 - Overall aura, energy, vibe
-- Kya yeh insaan khush dikhta hai ya andar se kuch alag chal raha hai
-- Unki asli personality, strength, weakness
+- Asli personality, strength, weakness
+- Abhi is waqt yeh insaan andar se kaisa feel kar raha hai
 
-Respond ONLY in this exact JSON format, no markdown, no extra text:
+MOOD DECISION RULES:
+- dominant_mood = "happy", "sometimes", ya "sad" mein se SIRF EK choose karo
+- dominant_pct = usi mood ka percentage (0-100)
+- Agar dominant_mood "sad" ya "sometimes" hai toh motivational = true
+- Agar dominant_mood "happy" hai toh motivational = false
+
+Respond ONLY in this exact JSON, no markdown, no extra text:
 {
-  "happy_pct": <0-100 integer>,
-  "sometimes_pct": <0-100 integer>,
-  "sad_pct": <0-100 integer>,
   "dominant_mood": "happy" or "sometimes" or "sad",
-  "main_verdict": "<1 line Hinglish mein — jaise koi close dost bolega, direct aur poetic dono — e.g. 'Teri aankhon mein ek alag hi duniya hai ${name}, jo log dekh nahi paate'>",
+  "dominant_pct": <integer 0-100>,
+  "mood_label": "<Hinglish label e.g. 'Udaas' ya 'Kabhi Khush Kabhi Nahi' ya 'Khush Mizaaj'>",
+  "motivational": true or false,
+  "main_verdict": "<1 punchy Hinglish line — jaise close dost bolega — very personal, direct>",
   "sections": [
     {
       "icon": "👁️",
       "label": "AANKHEIN KYA KEHTI HAIN",
       "stripe": "stripe-saffron",
-      "content": "<3-4 lines Hinglish mein — sirf aankhon ki deep reading — kya emotion chupaaya hai, kya sapne hain, kitna dard hai, kitni khushi hai — very personal feel>"
+      "content": "<3-4 lines Hinglish — aankhon ki deep reading — emotion, sapne, dard, khushi>"
     },
     {
       "icon": "✨",
       "label": "ASLI PERSONALITY",
       "stripe": "stripe-cosmic",
-      "content": "<3-4 lines Hinglish mein — chehra kya bolta hai unki real personality ke baare mein — bahar se jo dikhte hain vs andar se jo hain — koi mask hai kya>"
+      "content": "<3-4 lines Hinglish — bahar se jo dikhte hain vs andar se jo hain>"
     },
     {
       "icon": "💪",
       "label": "TERI TAAKAT",
       "stripe": "stripe-gold",
-      "content": "<3-4 lines Hinglish mein — unke chehere se jo strength aur power dikhti hai — kya special quality hai jo duniya ko nahi pata but face reveal karta hai>"
+      "content": "<3-4 lines Hinglish — chehere se jo hidden strength dikhti hai>"
     },
     {
       "icon": "🌊",
       "label": "ANDAR KI FEELING",
       "stripe": "stripe-rose",
-      "content": "<3-4 lines Hinglish mein — abhi is waqt yeh insaan andar se kya feel kar raha hai — kya struggle hai, kya excitement hai, kya longing hai — very deep and honest>"
+      "content": "<3-4 lines Hinglish — abhi is waqt kya chal raha hai andar>"
     },
     {
       "icon": "🔮",
       "label": "KAALDRISHTI KA SANDESH",
       "stripe": "stripe-teal",
-      "content": "<2-3 lines Hinglish mein — ek bahut personal message sirf ${name} ke liye — aisa lage jaise kisi ne pehli baar truly samjha ho — inspiring aur emotional dono>"
+      "content": "<IF motivational=true: 3-4 powerful motivating Hinglish lines — seedha bolo, uthao, inspire karo. IF motivational=false: 2-3 warm celebratory lines — khushi celebrate karo>"
     }
   ]
 }`;
