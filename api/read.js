@@ -11,86 +11,84 @@ export default async function handler(req, res) {
   }
 
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  const { imageBase64, imageType, dob } = req.body;
-
-  if (!imageBase64 || !dob) {
-    return res.status(400).json({ error: 'Missing image or date of birth' });
+  const { imageBase64, imageType, name } = req.body;
+  if (!imageBase64 || !name) {
+    return res.status(400).json({ error: 'Photo ya naam missing hai bhai' });
   }
 
-  function getZodiac(dobStr) {
-    const d = new Date(dobStr);
-    const month = d.getMonth() + 1;
-    const day = d.getDate();
-    if ((month===3&&day>=21)||(month===4&&day<=19)) return {sign:'Aries',symbol:'♈',hindi:'मेष'};
-    if ((month===4&&day>=20)||(month===5&&day<=20)) return {sign:'Taurus',symbol:'♉',hindi:'वृषभ'};
-    if ((month===5&&day>=21)||(month===6&&day<=20)) return {sign:'Gemini',symbol:'♊',hindi:'मिथुन'};
-    if ((month===6&&day>=21)||(month===7&&day<=22)) return {sign:'Cancer',symbol:'♋',hindi:'कर्क'};
-    if ((month===7&&day>=23)||(month===8&&day<=22)) return {sign:'Leo',symbol:'♌',hindi:'सिंह'};
-    if ((month===8&&day>=23)||(month===9&&day<=22)) return {sign:'Virgo',symbol:'♍',hindi:'कन्या'};
-    if ((month===9&&day>=23)||(month===10&&day<=22)) return {sign:'Libra',symbol:'♎',hindi:'तुला'};
-    if ((month===10&&day>=23)||(month===11&&day<=21)) return {sign:'Scorpio',symbol:'♏',hindi:'वृश्चिक'};
-    if ((month===11&&day>=22)||(month===12&&day<=21)) return {sign:'Sagittarius',symbol:'♐',hindi:'धनु'};
-    if ((month===12&&day>=22)||(month===1&&day<=19)) return {sign:'Capricorn',symbol:'♑',hindi:'मकर'};
-    if ((month===1&&day>=20)||(month===2&&day<=18)) return {sign:'Aquarius',symbol:'♒',hindi:'कुंभ'};
-    return {sign:'Pisces',symbol:'♓',hindi:'मीन'};
-  }
+  const prompt = `Tu KaalDrishti hai — ek ancient soul reader jo sirf chehra dekh ke insaan ki poori kahani padh leta hai.
 
-  const zodiac = getZodiac(dob);
-  const dobDate = new Date(dob);
-  const age = new Date().getFullYear() - dobDate.getFullYear();
+Is insaan ka naam hai: ${name}
 
-  const prompt = `You are KaalDrishti — an ancient cosmic soul reader combining face reading and Vedic astrology.
+Inki photo dekh aur BAHUT GEHRI face reading kar. Har cheez notice kar:
+- Aankhein: kya chupaati hain, kya bolti hain, andar ki feeling
+- Maatha, naak, hont, jawline — kya reveal karta hai character ke baare mein
+- Overall aura, energy, vibe
+- Kya yeh insaan khush dikhta hai ya andar se kuch alag chal raha hai
+- Unki asli personality, strength, weakness
 
-Analyze this person's photo carefully. Their date of birth is ${dob}. They are approximately ${age} years old. Their zodiac sign is ${zodiac.sign} (${zodiac.symbol} ${zodiac.hindi}).
-
-Your reading has TWO PARTS:
-PART 1 — FACE READING: Read their facial features (eyes, expression, energy, aura) to determine if they are usually happy, sad, or mixed emotionally.
-PART 2 — ASTROLOGY: Based on their zodiac sign ${zodiac.sign} and birth date ${dob}, give deep astrological predictions.
-
-Return ONLY valid JSON, absolutely no markdown, no extra text, no code blocks:
+Respond ONLY in this exact JSON format, no markdown, no extra text:
 {
-  "zodiac_sign": "${zodiac.sign}",
-  "zodiac_symbol": "${zodiac.symbol}",
-  "zodiac_hindi": "${zodiac.hindi}",
-  "happy_pct": <integer 0-100, based on face reading>,
-  "sometimes_pct": <integer 0-100, based on face reading>,
-  "sad_pct": <integer 0-100, based on face reading>,
+  "happy_pct": <0-100 integer>,
+  "sometimes_pct": <0-100 integer>,
+  "sad_pct": <0-100 integer>,
   "dominant_mood": "happy" or "sometimes" or "sad",
-  "face_verdict": "One poetic sentence about their emotional nature from face reading",
-  "face_sections": [
-    {"icon":"👁️","label":"FACE READING — SOUL ENERGY","stripe":"stripe-saffron","content":"3-4 sentences deeply reading their facial features — eyes reveal their depth, expression shows their nature, overall energy and what it means about who they truly are inside"},
-    {"icon":"😊","label":"FACE READING — EMOTIONAL PATTERN","stripe":"stripe-cosmic","content":"3-4 sentences about their emotional patterns based on face — are they naturally joyful, do they hide pain, when are they truly happy vs when do they feel low"}
-  ],
-  "astro_sections": [
-    {"icon":"🪐","label":"ASTROLOGY — YOUR ${zodiac.sign.toUpperCase()} DESTINY","stripe":"stripe-gold","content":"3-4 sentences about their core personality and life path as a ${zodiac.sign}, their ruling planet, element, and what the cosmos has destined for them"},
-    {"icon":"🔮","label":"ASTROLOGY — NEAR FUTURE (3 Months)","stripe":"stripe-mystic","content":"3-4 sentences of specific predictions for the next 3 months based on current planetary positions for ${zodiac.sign} — career, opportunities, challenges"},
-    {"icon":"💫","label":"ASTROLOGY — LOVE & RELATIONSHIPS","stripe":"stripe-rose","content":"3-4 sentences about their romantic destiny, compatible signs, and what the universe has planned for their heart based on ${zodiac.sign} traits"},
-    {"icon":"⚡","label":"COSMIC MESSAGE","stripe":"stripe-teal","content":"One powerful, deeply personal message combining both their face reading and astrology — make it feel like it was written only for this exact person born on ${dob}"}
+  "main_verdict": "<1 line Hinglish mein — jaise koi close dost bolega, direct aur poetic dono — e.g. 'Teri aankhon mein ek alag hi duniya hai ${name}, jo log dekh nahi paate'>",
+  "sections": [
+    {
+      "icon": "👁️",
+      "label": "AANKHEIN KYA KEHTI HAIN",
+      "stripe": "stripe-saffron",
+      "content": "<3-4 lines Hinglish mein — sirf aankhon ki deep reading — kya emotion chupaaya hai, kya sapne hain, kitna dard hai, kitni khushi hai — very personal feel>"
+    },
+    {
+      "icon": "✨",
+      "label": "ASLI PERSONALITY",
+      "stripe": "stripe-cosmic",
+      "content": "<3-4 lines Hinglish mein — chehra kya bolta hai unki real personality ke baare mein — bahar se jo dikhte hain vs andar se jo hain — koi mask hai kya>"
+    },
+    {
+      "icon": "💪",
+      "label": "TERI TAAKAT",
+      "stripe": "stripe-gold",
+      "content": "<3-4 lines Hinglish mein — unke chehere se jo strength aur power dikhti hai — kya special quality hai jo duniya ko nahi pata but face reveal karta hai>"
+    },
+    {
+      "icon": "🌊",
+      "label": "ANDAR KI FEELING",
+      "stripe": "stripe-rose",
+      "content": "<3-4 lines Hinglish mein — abhi is waqt yeh insaan andar se kya feel kar raha hai — kya struggle hai, kya excitement hai, kya longing hai — very deep and honest>"
+    },
+    {
+      "icon": "🔮",
+      "label": "KAALDRISHTI KA SANDESH",
+      "stripe": "stripe-teal",
+      "content": "<2-3 lines Hinglish mein — ek bahut personal message sirf ${name} ke liye — aisa lage jaise kisi ne pehli baar truly samjha ho — inspiring aur emotional dono>"
+    }
   ]
 }`;
 
   try {
-    const apiKey = process.env.GROQ_API_KEY;
-
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
         model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-        max_tokens: 1500,
-        temperature: 0.8,
+        max_tokens: 2000,
+        temperature: 0.85,
         messages: [{
           role: 'user',
           content: [
             {
               type: 'image_url',
-              image_url: { url: `data:${imageType || 'image/jpeg'};base64,${imageBase64}` }
+              image_url: {
+                url: `data:${imageType || 'image/jpeg'};base64,${imageBase64}`,
+                detail: 'high'
+              }
             },
             { type: 'text', text: prompt }
           ]
@@ -100,16 +98,13 @@ Return ONLY valid JSON, absolutely no markdown, no extra text, no code blocks:
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      return res.status(response.status).json({
-        error: err.error?.message || 'Groq API error'
-      });
+      return res.status(response.status).json({ error: err.error?.message || 'Groq error' });
     }
 
     const data = await response.json();
     const raw = data.choices?.[0]?.message?.content || '';
     const clean = raw.replace(/```json|```/g, '').trim();
     const reading = JSON.parse(clean);
-
     return res.status(200).json(reading);
 
   } catch (err) {
